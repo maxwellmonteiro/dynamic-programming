@@ -1,0 +1,4 @@
+*.o
+*.exe
+fibonacci_recursive
+fibonacci_dp
