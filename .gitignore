@@ -1,2 +1,6 @@
 .vscode/
 params.txt
+/args_loader/*.exe
+/args_loader/*.o
+/grid_traveler/*.o
+/grid_traveler/*.exe
