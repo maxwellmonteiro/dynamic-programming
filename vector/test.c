@@ -67,6 +67,8 @@ int main(int argc, char** argv)
     
     for (int i = 9999; i >= 0; i--)
         vector_pop(teste2);
+
+    printf("teste size: %"PRIu64" capacity: %"PRIu64"\n", vector_get_size(teste2), vector_get_capacity(teste2));  
     printf("teste2: ");  
     for (vector_type(int) it = vector_begin(teste2); it != vector_end(teste2); it++)
         printf("%d ", *it);

@@ -1,5 +1,6 @@
-#include "fibonacci.h"
 #include <stdlib.h>
+#include <vector.h>
+#include "fibonacci.h"
 
 uint64_t fibonacci(long n)
 {
@@ -8,19 +9,15 @@ uint64_t fibonacci(long n)
     return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
-uint64_t* create_memo(long n)
+vector_type(uint64_t) create_memo(long n)
 {
-    uint64_t* memo = malloc(sizeof(uint64_t) * (n + 1));
-
+    vector_type(uint64_t) memo;
+    
+    vector_new(memo, n + 1);
     for(int i = 0; i <= n; i++)
         memo[i] = 0;
 
     return memo;
-}
-
-void destroy_memo(uint64_t* memo)
-{
-    free(memo);
 }
 
 uint64_t fibonacci_memoized(long n, uint64_t* memo)

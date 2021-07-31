@@ -7,9 +7,12 @@
 
 int main(int argc, char** argv)
 {
-    uint64_t n;   
+    uint64_t n;
+    vector_type(uint64_t) memo;
+
     n = load_uint_at(FILE_NAME, 0);
-    uint64_t* memo = create_memo(n);
+    memo = create_memo(n);
     printf("Fibonacci(%"PRIu64"): %"PRIu64"\n", n, fibonacci_memoized(n, memo));
-    destroy_memo(memo);
+    vector_free(memo);
+    return 0;
 }

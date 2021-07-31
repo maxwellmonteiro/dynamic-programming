@@ -68,7 +68,7 @@
         size_t size = vector_get_size(vector); \
         if (size >= capacity) \
         { \
-            size_t increment = (size_t) ((double) capacity * 0.5); \
+            size_t increment = (size_t) (capacity * 0.5); \
             increment = increment ? increment : 1; \
             vector_realloc((vector), capacity + increment); \
         } \
@@ -78,7 +78,8 @@
 
 #define vector_pop(vector) \
     do { \
-        vector_set_size((vector), vector_get_size(vector) - 1); \
+        if (vector && vector_get_size(vector) > 0) \
+            vector_set_size((vector), vector_get_size(vector) - 1); \
     } while (0)
 
 #define vector_begin(vector) \

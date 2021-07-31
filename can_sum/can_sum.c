@@ -15,6 +15,16 @@ void print_list(uint64_t* list, int64_t total, uint32_t size)
     printf("] = %"PRId64"\n", total);
 }
 
+vector_type(bool) create_memo(uint32_t size)
+{
+    vector_type(bool) memo;
+    
+    vector_new(memo, size + 1);    
+    for (int i = 0; i <= size; i++)
+        memo[i] = true;
+    return memo;
+}
+
 bool can_sum(int64_t target_sum, uint64_t* list, uint32_t size)
 {                
     if (target_sum == 0)

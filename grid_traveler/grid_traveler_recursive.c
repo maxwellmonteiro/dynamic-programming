@@ -13,5 +13,7 @@ int main(int argc, char** argv)
     load_uints(args, FILE_NAME);
     uint32_t rows = (uint32_t) args[0];
     uint32_t cols = (uint32_t) args[1];
-    printf("grid traveler(%"PRIu32", %"PRIu32"): %"PRIu64"\n", rows, cols, calc_paths(rows, cols));    
+    printf("grid traveler(%"PRIu32", %"PRIu32"): %"PRIu64"\n", rows, cols, calc_paths(rows, cols));
+    vector_free(args);
+    return 0;
 }
