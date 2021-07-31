@@ -2,9 +2,12 @@
 
 CFLAGS = -pipe -Wall -O3
 
-SUB_SYSTEMS = ss_grid_traveler ss_fibonacci ss_can_sum
+SUB_SYSTEMS = ss_args_loader ss_grid_traveler ss_fibonacci ss_can_sum
 
 all: $(SUB_SYSTEMS)
+
+ss_args_loader:
+	$(MAKE) -C args_loader
 
 ss_grid_traveler:
 	$(MAKE) -C grid_traveler
@@ -16,6 +19,7 @@ ss_can_sum:
 	$(MAKE) -C can_sum
 
 clean:
+	$(MAKE) clean -C args_loader
 	$(MAKE) clean -C can_sum 
 	$(MAKE) clean -C fibonacci 
 	$(MAKE) clean -C grid_traveler

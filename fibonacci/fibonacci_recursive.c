@@ -1,16 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <args_loader.h>
 #include "fibonacci.h"
 
-long get_arg(int argc, char** argv)
-{
-    if (argc >= 1) 
-        return atoi(argv[1]);
-    return 1;
-}
+#define FILE_NAME "params.txt"
 
 int main(int argc, char** argv)
 {
-    long n = get_arg(argc, argv);    
-    printf("Fibonacci: %"PRIu64"\n", fibonacci(n));
+    uint64_t n;   
+    n = load_uint_at(FILE_NAME, 0);
+    printf("Fibonacci(%"PRIu64"): %"PRIu64"\n", n, fibonacci(n));
 }

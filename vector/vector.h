@@ -23,10 +23,10 @@
     } while (0) \
 
 #define vector_get_capacity(vector) \
-    (vector) ? ((size_t*) (vector))[CAPACITY_INDEX] : 0
+    ((vector) ? ((size_t*) (vector))[CAPACITY_INDEX] : 0)
 
 #define vector_get_size(vector) \
-    (vector) ? ((size_t*) (vector))[SIZE_INDEX] : 0
+    ((vector) ? ((size_t*) (vector))[SIZE_INDEX] : 0)
 
 #define vector_empty(vector) \
     (vector_get_size(vector) == 0)
@@ -90,8 +90,19 @@
     do { \
         if (vector) \
         { \
-            size_t* ptr = &(((size_t*) (vector))[CAPACITY_INDEX]); \
+            size_t* ptr = &((size_t*) (vector))[CAPACITY_INDEX]; \
             free(ptr); \
+        } \
+    } while (0)
+
+// Use this for a vector of pointers
+#define vector_free_elements(vector, type) \
+    do { \
+        if (vector) \
+        { \
+            type it; \
+            for (it = vector_begin(vector); it != vector_end(vector); it++) \
+                free(*it); \
         } \
     } while (0)
     

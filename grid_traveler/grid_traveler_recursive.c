@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <args_loader.h>
 #include "grid_traveler.h"
 
-uint32_t get_arg(int argc, char** argv, int i)
-{
-    if (argc >= (i + 1))             
-        return atoi(argv[i]);    
-    return 1;
-}
+#define FILE_NAME "params.txt"
 
 int main(int argc, char** argv)
 {    
-    uint32_t rows = get_arg(argc, argv, 1);
-    uint32_t cols = get_arg(argc, argv, 2);    
-    printf("[%"PRIu32", %"PRIu32"] #paths: %"PRIu64"\n", rows, cols, calc_paths(rows, cols));    
+    vector_type (uint64_t) args;
+
+    vector_new(args, 2);
+    load_uints(args, FILE_NAME);
+    uint32_t rows = (uint32_t) args[0];
+    uint32_t cols = (uint32_t) args[1];
+    printf("grid traveler(%"PRIu32", %"PRIu32"): %"PRIu64"\n", rows, cols, calc_paths(rows, cols));    
 }

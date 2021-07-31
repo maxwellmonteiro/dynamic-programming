@@ -4,3 +4,7 @@ params.txt
 /args_loader/*.o
 /grid_traveler/*.o
 /grid_traveler/*.exe
+/can_sum/*.o
+/can_sum/*.exe
+/fibonacci/*.o
+/fibonacci/*.exe
