@@ -35,12 +35,8 @@
     do { \
         if (element_count > 0) \
         { \
-            size_t new_capacity = 2 * sizeof (size_t) + element_count * sizeof (*(vector)); \
-            size_t* ptr = malloc(new_capacity); \
-            assert (ptr); \
-            (vector) = (void*) &ptr[BEGIN_INDEX]; \
-            vector_set_capacity((vector), element_count); \
-            vector_set_size((vector), 0); \
+            vector = NULL; \
+            vector_realloc(vector, element_count); \
         } else { \
             vector = NULL; \
         } \
@@ -48,7 +44,7 @@
 
 #define vector_realloc(vector, element_count) \
     do { \
-        size_t new_capacity = 2 * sizeof (size_t) + element_count * sizeof (*(vector)); \
+        size_t new_capacity = 2 * sizeof (size_t) + ((size_t) element_count) * sizeof (*(vector)); \
         if ((vector) == NULL) \
         { \
             size_t* ptr = malloc(new_capacity); \
@@ -57,10 +53,11 @@
             vector_set_capacity((vector), element_count); \
             vector_set_size((vector), 0); \
         } else { \
-            size_t* ptr = &((size_t*) (vector))[SIZE_INDEX]; \
-            ptr = realloc(ptr, new_capacity); \
-            assert (ptr); \
-            (vector) = (void *) &ptr[BEGIN_INDEX]; \
+            size_t* new_ptr; \
+            size_t* ptr = &((size_t*) (vector))[CAPACITY_INDEX]; \
+            new_ptr = realloc(ptr, new_capacity); \
+            assert (new_ptr); \
+            (vector) = (void *) &new_ptr[BEGIN_INDEX]; \
             vector_set_capacity((vector), element_count); \
         } \
     } while (0)
@@ -70,7 +67,11 @@
         size_t capacity = vector_get_capacity(vector); \
         size_t size = vector_get_size(vector); \
         if (size >= capacity) \
-            vector_realloc((vector), capacity + 10); \
+        { \
+            size_t increment = (size_t) ((double) capacity * 0.5); \
+            increment = increment ? increment : 1; \
+            vector_realloc((vector), capacity + increment); \
+        } \
         (vector)[size] = value; \
         vector_set_size((vector), size + 1); \
     } while (0) \
