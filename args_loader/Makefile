@@ -8,12 +8,12 @@ INCLUDES= ../vector
 all: $(EXECUTABLES)
 
 test: $(OBJECTS)
-	gcc $(CFLAGS) $(OBJECTS) -o $@
+	$(CXX) $(CFLAGS) $(OBJECTS) -o $@
 
-%.o: %.c
-	gcc $(CFLAGS) -I$(INCLUDES) -c $<
+%.o: %.cpp
+	$(CXX) $(CFLAGS) -I$(INCLUDES) -c $<
 
-%.c: %.h
+%.cpp: %.hpp
 
 clean:
 	rm -f *.o $(EXECUTABLES)

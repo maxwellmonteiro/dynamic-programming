@@ -10,15 +10,15 @@ INCLUDES = -I../vector -I../args_loader
 all: $(EXECUTABLES)
 
 fibonacci_recursive: $(FIBONACCI_RECURSIVE_OBJECTS)
-	gcc $(CFLAGS) $(FIBONACCI_RECURSIVE_OBJECTS) -o $@
+	$(CXX) $(CFLAGS) $(FIBONACCI_RECURSIVE_OBJECTS) -o $@
 
 fibonacci_dp: $(FIBONACCI_DP_OBJECTS)
-	gcc $(CFLAGS) $(FIBONACCI_DP_OBJECTS) -o $@
+	$(CXX) $(CFLAGS) $(FIBONACCI_DP_OBJECTS) -o $@
 
-%.o: %.c
-	gcc $(CFLAGS) $(INCLUDES) -c $<
+%.o: %.cpp
+	$(CXX) $(CFLAGS) $(INCLUDES) -c $<
 
-%.c: %.h
+%.cpp: %.hpp
 
 clean:
 	rm -f *.o $(EXECUTABLES)
